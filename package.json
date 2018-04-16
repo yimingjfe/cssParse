@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "postcss": "^6.0.21",
+    "rework": "^1.0.1"
+  }
+}
