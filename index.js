@@ -28,12 +28,14 @@ function testMy(){
 
 function testMyParse(){
   const ast = myParse(exampleCss.toString())
+  console.log('ast', ast)
 }
 
-testRework()
+// testRework()
 // testReworkCss()
 // testPostCss()
 // testMy()
+testMyParse()
 
 // console.log(str2Char(exampleCss.toString()))
 

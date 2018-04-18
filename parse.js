@@ -1,10 +1,11 @@
+// TODO: declarations的最后位置有问题
+// TODO: 错误信息有问题
 module.exports = function(css){
   let lineno = 1
   let column = 1
   function updatePosition(str){
     let lines = str.match(/\n/g)
-    if(lines.length > 0) lineno += lines.length
-    column += column - lines.length
+    if(lines) lineno += lines.length
     let i = str.lastIndexOf('\n')
     column = ~i ? str.length - i : column + str.length
   }
@@ -19,7 +20,7 @@ module.exports = function(css){
     }
   }
 
-  function position(start){
+  function position(){
     let start = { line: lineno, column: column }
     return function(node){
       node.position = new Position(start)
@@ -81,12 +82,13 @@ module.exports = function(css){
     let decls = []
     if(!open()) throw new Error('missing "{"')
     let decl;
-    while(decl = declatation()){
+    while(decl = declaration()){
       if(decl !== false){
         decls.push(decl)
         comments(decls)
       }
     }
+    return decls
   }
 
   function declaration(){
@@ -95,36 +97,29 @@ module.exports = function(css){
     if(!property) return
     property = property[0]
     if(!exec(/^:\s*/)) return new Error("property missing ':'")
-    let value = exec(/([^;\s]+?)/)
-
+    let value = exec(/([^;\s]+)/)
+    value = value[0]
 
     let ret = pos({
       type: 'declaration',
       property: property,
-      value: value.trim()
+      value: value && value.trim()
     })
-    match(/^[;\s]*/);
+    exec(/^[;\s]*/);
     return ret
   }
   
   function resolveRule(){
     whitespace()
-    let start = {
-      line: lineno,
-      column: column
-    }
+    let pos = position()
     let selectors = selector()
-    return {
+    let decls = declarations()
+    exec(/\s*}/)
+    return pos({
       type: 'rule',
       selectors: selectors,
-      declarations,
-      position: {
-        start,
-        end: {
-
-        }
-      }
-    }
+      declarations: decls
+    })  
   }
 
   function resolveRules(){
