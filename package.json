@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jison": "^0.4.18",
     "postcss": "^6.0.21",
     "rework": "^1.0.1"
   }
