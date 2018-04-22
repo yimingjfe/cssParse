@@ -1,4 +1,3 @@
-// TODO: declarations的最后位置有问题
 // TODO: 错误信息有问题
 module.exports = function(css){
   let lineno = 1
@@ -42,7 +41,7 @@ module.exports = function(css){
   }
   function selector(){
     let selectors = exec(/[^{]+/g)[0]
-    selectors = selectors.split('/\s+/')
+    selectors = selectors.split(/\s+/)
     return selectors
   }
 
@@ -97,7 +96,7 @@ module.exports = function(css){
     if(!property) return
     property = property[0]
     if(!exec(/^:\s*/)) return new Error("property missing ':'")
-    let value = exec(/([^;\s]+)/)
+    let value = exec(/([^;]+)/)
     value = value[0]
 
     let ret = pos({
@@ -127,8 +126,8 @@ module.exports = function(css){
     while(css.length > 0){
       rules.push(resolveRule())
     }
+    return rules
   }
-
 
 
   const rules = resolveRules()

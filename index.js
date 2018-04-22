@@ -13,8 +13,10 @@ function testPostCss(){
 }
 
 function testReworkCss(){
-  const result = css.parse(exampleCss.toString())
-  console.log(result)
+  const ast = css.parse(exampleCss.toString())
+  const result = css.stringify(ast, { sourcemap: true })
+  console.log('result.code', result.code)
+  console.log('end')
 }
 
 function testRework(){
@@ -32,10 +34,10 @@ function testMyParse(){
 }
 
 // testRework()
-// testReworkCss()
+testReworkCss()
 // testPostCss()
 // testMy()
-testMyParse()
+// testMyParse()
 
 // console.log(str2Char(exampleCss.toString()))
 
