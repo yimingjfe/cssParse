@@ -18,17 +18,19 @@ class Compiler{
     const indent = this.indent(1)
     return this.emit(node.selectors.map(selector => indent + selector).join(',\n'), node.position) 
       + this.emit(' {\n')
-      + this.emit(this.indent(1))
       + this.mapVisit(node.declarations)
       + this.emit('}')
   }
 
   indent = (level) => {
+    level = level || 1
     return Array(level).join(` `)
   }
-
-  declaration = () => {
-
+  // declaration既有属性，又有值，怎么传递位置信息
+  declaration = (node) => {
+    return this.emit(this.indent(1))
+      + this.emit(node.property + ': ' + node.value)
+      + this.emit(';')
   }
 }
 
