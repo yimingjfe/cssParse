@@ -41,7 +41,7 @@ module.exports = function(css){
   }
   function selector(){
     let selectors = exec(/[^{]+/g)[0]
-    selectors = selectors.split(/\s+/)
+    selectors = selectors.split(/,/)
     return selectors
   }
 

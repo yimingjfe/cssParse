@@ -13,7 +13,7 @@ function testPostCss(){
 }
 
 function testReworkCss(){
-  const ast = css.parse(exampleCss.toString())
+  const ast = css.parse(exampleCss.toString(), {source: './example.css'})
   const result = css.stringify(ast, { sourcemap: true })
   console.log('result.code', result.code)
   console.log('end')
