@@ -4,6 +4,7 @@ const tokenize = require('./tokenize')
 const rework = require('rework')
 const css = require('css')
 const myParse = require('./parse')
+const stringify = require('./stringify')
 
 const exampleCss = fs.readFileSync('./example.css')
 
@@ -30,14 +31,15 @@ function testMy(){
 
 function testMyParse(){
   const ast = myParse(exampleCss.toString())
-  console.log('ast', ast)
+  const result = stringify(ast)
+  console.log('result', result)
 }
 
 // testRework()
-testReworkCss()
+// testReworkCss()
 // testPostCss()
 // testMy()
-// testMyParse()
+testMyParse()
 
 // console.log(str2Char(exampleCss.toString()))
 

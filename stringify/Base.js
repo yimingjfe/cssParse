@@ -9,3 +9,7 @@ exports.mapVisit = function(nodes, delim){
   }
   return buf
 }
+
+exports.emit = function(str){
+  return str;
+}
